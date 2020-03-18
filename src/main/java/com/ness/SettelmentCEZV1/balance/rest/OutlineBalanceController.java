@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,17 +15,13 @@ public class OutlineBalanceController {
     @Autowired
     private OutlineBalanceHeaderService outlineBalanceHeaderService;
 
-   @GetMapping("/outlineBalanceGenerate")
-    public List<OutlineBalanceHeader> generate (){
-       OutlineBalanceHeader outlineBalanceHeader = outlineBalanceHeaderFakeData.fakeData1();
-       outlineBalanceHeaderService.save(outlineBalanceHeader);
+    @GetMapping("/outlineBalanceGenerate")
+    public List<OutlineBalanceHeader> generate() {
 
-       OutlineBalanceHeader outlineBalanceHeader1 = outlineBalanceHeaderFakeData.fakeData2();
-       outlineBalanceHeaderService.save(outlineBalanceHeader1);
+        outlineBalanceHeaderService.deleteAll();
+        List<OutlineBalanceHeader> outlineBalanceHeader = outlineBalanceHeaderFakeData.fakeData();
+        outlineBalanceHeaderService.save(outlineBalanceHeader);
 
-       List<OutlineBalanceHeader> list =  new ArrayList<>();
-       list.add(outlineBalanceHeader);
-       list.add(outlineBalanceHeader1);
-        return list;
+        return outlineBalanceHeader;
     }
 }

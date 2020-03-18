@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OutlineBalanceHeaderRepo extends CrudRepository<OutlineBalanceHeader, Long> {
+
+    OutlineBalanceHeader findByIndexLetter (String indexLetter);
+
+    void deleteAll();
 }
+
